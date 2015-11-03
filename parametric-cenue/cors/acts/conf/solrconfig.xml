@@ -832,9 +832,11 @@
       -->
      <lst name="defaults">
        <str name="echoParams">explicit</str>
-       <int name="rows">10</int>
-       <str name="df">name</str>
-        <str name="fl">code,name,description</str>
+       <int name="rows">15</int>
+       <str name="df">keywords</str>
+       <str name="defType">edismax</str>
+       <str name="qf">code^10 keywords^8 include^2</str>
+       <str name="fl">code,name,description,include,exclude</str>
      </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
@@ -1037,19 +1039,13 @@
        This handler will pick a response format to match the input
        if the 'wt' parameter is not explicit
     -->
-  <requestHandler name="/update" class="solr.UpdateRequestHandler">
-    <!-- See below for information on defining 
-         updateRequestProcessorChains that can be used by name 
-         on each Update Request
-      -->
-    <!--
-       <lst name="defaults">
-         <str name="update.chain">dedupe</str>
-       </lst>
-       -->
-  </requestHandler>
+
+ <requestHandler enable="${solr.solr.development}" name="/update" class="solr.UpdateRequestHandler">
+ </requestHandler>
+
 
   <!-- for back compat with clients using /update/json and /update/csv -->  
+<!--
   <requestHandler name="/update/json" class="solr.UpdateRequestHandler">
         <lst name="defaults">
          <str name="stream.contentType">application/json</str>
@@ -1060,27 +1056,27 @@
          <str name="stream.contentType">application/csv</str>
        </lst>
   </requestHandler>
-
+-->
   <!-- Solr Cell Update Request Handler
 
        http://wiki.apache.org/solr/ExtractingRequestHandler 
 
     -->
-  <requestHandler name="/update/extract" 
+<!-- 
+ <requestHandler name="/update/extract" 
                   startup="lazy"
                   class="solr.extraction.ExtractingRequestHandler" >
     <lst name="defaults">
       <str name="lowernames">true</str>
       <str name="uprefix">ignored_</str>
 
-      <!-- capture link hrefs but ignore div attributes -->
       <str name="captureAttr">true</str>
       <str name="fmap.a">links</str>
       <str name="fmap.div">ignored_</str>
     </lst>
   </requestHandler>
 
-
+-->
   <!-- Field Analysis Request Handler
 
        RequestHandler that provides much the same functionality as
@@ -1171,13 +1167,15 @@
     -->
 
   <!-- ping/healthcheck -->
-  <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
+  <requestHandler name="/health/ping" class="solr.PingRequestHandler">
     <lst name="invariants">
       <str name="q">solrpingquery</str>
     </lst>
-    <lst name="defaults">
+<!--    
+<lst name="defaults">
       <str name="echoParams">all</str>
     </lst>
+-->
     <!-- An optional feature of the PingRequestHandler is to configure the 
          handler with a "healthcheckFile" which can be used to enable/disable 
          the PingRequestHandler.
