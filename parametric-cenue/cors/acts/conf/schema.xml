@@ -69,7 +69,7 @@
      type: mandatory - the name of a field type from the 
        <types> fieldType section
      indexed: true if this field should be indexed (searchable or sortable)
-     stored: true if this field should be retrievable
+     tored: true if this field should be retrievable
      docValues: true if this field should have doc values. Doc values are
        useful for faceting, grouping, sorting and function queries. Although not
        required, doc values will make the index faster to load, more
@@ -176,9 +176,10 @@
        It supports doc values but in that case the field needs to be
        single-valued and either required or have a default value.
       -->
-      <!-- 
+    <!-- 
     <fieldType name="string" class="solr.StrField" sortMissingLast="true" />
-     -->
+ 	-->
+	
     <fieldType name="string" class="solr.TextField"
         sortMissingLast="true" omitNorms="true">
         <analyzer>
