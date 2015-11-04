@@ -1040,12 +1040,12 @@
        if the 'wt' parameter is not explicit
     -->
 
- <requestHandler enable="${solr.solr.development}" name="/update" class="solr.UpdateRequestHandler">
+ <requestHandler name="/update" class="solr.UpdateRequestHandler">
  </requestHandler>
 
 
   <!-- for back compat with clients using /update/json and /update/csv -->  
-<!-- 
+
   <requestHandler name="/update/json" class="solr.UpdateRequestHandler">
         <lst name="defaults">
          <str name="stream.contentType">application/json</str>
@@ -1056,13 +1056,13 @@
          <str name="stream.contentType">application/csv</str>
        </lst>
   </requestHandler>
--->
+
   <!-- Solr Cell Update Request Handler
 
        http://wiki.apache.org/solr/ExtractingRequestHandler 
 
     -->
-<!-- 
+ 
  <requestHandler name="/update/extract" 
                   startup="lazy"
                   class="solr.extraction.ExtractingRequestHandler" >
@@ -1076,7 +1076,6 @@
     </lst>
   </requestHandler>
 
--->
   <!-- Field Analysis Request Handler
 
        RequestHandler that provides much the same functionality as

@@ -22,6 +22,7 @@ touch /.users_created
 
 fi
 
-exec ${CATALINA_HOME}/bin/catalina.sh run
-
-
+${CATALINA_HOME}/bin/catalina.sh start
+sleep 30
+/refresh.sh
+exec tail -f ${CATALINA_HOME}/logs/indec.log
